@@ -7,6 +7,10 @@
   <meta name="description" content="All In 1 Property Management — premium local contractor for residential, commercial, and rural properties. Tree removal, excavating, lot clearing, snow removal, retaining walls, construction & demolition. Free estimates." />
   <meta name="theme-color" content="#0b0f14" />
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="assets/logo.jpg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,18 +19,17 @@
     :root{
       --bg:#0b0f14;
       --panel:#0f1722;
-      --panel2:#0c121b;
       --line:rgba(255,255,255,.10);
       --text:#e8eef6;
       --muted:#aab6c5;
       --accent:#f59e0b;
-      --accent2:#ffb547;
-      --ok:#22c55e;
       --max:1120px;
       --radius:18px;
-      --shadow: 0 14px 40px rgba(0,0,0,.45);
+      --shadow:0 14px 40px rgba(0,0,0,.45);
     }
+
     *{ box-sizing:border-box; }
+
     body{
       margin:0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -37,48 +40,81 @@
         var(--bg);
       line-height:1.55;
     }
+
     a{ color:inherit; text-decoration:none; }
     .container{ width:min(100%, calc(var(--max) + 40px)); margin:0 auto; padding:0 20px; }
 
     header{
-      position:sticky; top:0; z-index:1000;
-      background: rgba(11,15,20,.78);
-      backdrop-filter: blur(14px);
+      position:sticky;
+      top:0;
+      background:rgba(11,15,20,.85);
+      backdrop-filter:blur(12px);
       border-bottom:1px solid var(--line);
+      z-index:1000;
     }
+
     .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0; gap:14px; flex-wrap:wrap;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+      flex-wrap:wrap;
     }
-    .brand{ display:flex; align-items:center; gap:12px; }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
     .logo{
-      width:44px; height:44px; border-radius:12px;
-      background: linear-gradient(140deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
-      border:1px solid var(--line);
-      display:grid; place-items:center;
-      font-family: Oswald, sans-serif;
-      letter-spacing:.8px;
-      font-weight:700;
+      height:60px;
+      display:flex;
+      align-items:center;
     }
-    .brand .name strong{ display:block; font-family: Oswald, sans-serif; letter-spacing:.4px; font-size:18px; }
-    .brand .name span{ display:block; color:var(--muted); font-size:12px; margin-top:2px; }
+
+    .logo img{
+      height:100%;
+      width:auto;
+      max-width:180px;
+    }
+
+    .brand-text strong{
+      display:block;
+      font-family:Oswald, sans-serif;
+      font-size:20px;
+      letter-spacing:.5px;
+    }
+
+    .brand-text span{
+      display:block;
+      font-size:12px;
+      color:var(--muted);
+    }
 
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
       border-radius:12px;
-      padding:10px 14px;
+      padding:10px 16px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
+      background:rgba(255,255,255,.05);
       color:var(--text);
-      font-weight:900;
+      font-weight:800;
       font-size:13px;
       cursor:pointer;
-      white-space:nowrap;
+      transition:.2s;
     }
-    .btn:hover{ background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+
+    .btn:hover{
+      background:rgba(255,255,255,.1);
+    }
+
     .btn.primary{
-      background: linear-gradient(180deg, rgba(245,158,11,.95), rgba(245,158,11,.82));
-      border-color: rgba(245,158,11,.55);
+      background:linear-gradient(180deg, rgba(245,158,11,.95), rgba(245,158,11,.85));
+      border-color:rgba(245,158,11,.6);
       color:#151515;
     }
 
@@ -86,152 +122,176 @@
 
     .hero{
       border:1px solid var(--line);
-      border-radius: calc(var(--radius) + 8px);
-      box-shadow: var(--shadow);
-      background:
-        radial-gradient(700px 320px at 20% 0%, rgba(245,158,11,.18), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      padding:26px;
+      border-radius:calc(var(--radius) + 6px);
+      box-shadow:var(--shadow);
+      padding:32px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
     }
-    .kicker{
-      display:inline-flex; gap:10px; align-items:center;
-      color:rgba(232,238,246,.90);
-      font-weight:800;
-      font-size:12px;
-      letter-spacing:.22em;
-      text-transform:uppercase;
-      margin-bottom:10px;
-    }
-    .kicker .bar{ width:34px; height:2px; background: rgba(245,158,11,.9); border-radius:99px; }
+
     h1{
-      font-family: Oswald, sans-serif;
-      letter-spacing:.5px;
-      font-size:46px;
-      line-height:1.05;
+      font-family:Oswald, sans-serif;
+      font-size:48px;
+      margin:0 0 12px;
+      letter-spacing:.4px;
+    }
+
+    .sub{
+      color:var(--muted);
+      font-size:16px;
+      max-width:70ch;
+      margin-bottom:18px;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .section{ padding:40px 0; }
+
+    .title h2{
+      font-family:Oswald, sans-serif;
+      font-size:30px;
       margin:0 0 10px;
     }
-    .sub{ color:rgba(232,238,246,.86); font-size:16px; max-width: 70ch; margin:0 0 14px; }
-    .actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
-
-    .section{ padding:34px 0; }
-    .title{ display:flex; justify-content:space-between; gap:14px; align-items:flex-end; flex-wrap:wrap; margin-bottom:14px; }
-    .title h2{ margin:0; font-family: Oswald, sans-serif; letter-spacing:.35px; font-size:28px; }
-    .title p{ margin:0; color:var(--muted); max-width:70ch; font-size:14px; }
 
     .grid{
       display:grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns:repeat(3,1fr);
       gap:14px;
     }
+
     .card{
       border:1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      box-shadow: 0 10px 26px rgba(0,0,0,.35);
-      padding:16px;
+      border-radius:var(--radius);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      padding:18px;
+      box-shadow:0 10px 26px rgba(0,0,0,.35);
     }
-    .card strong{ display:block; font-size:16px; margin-bottom:6px; }
-    .card span{ display:block; color:var(--muted); font-size:13px; }
-    .card a{ display:inline-block; margin-top:10px; color: rgba(255,181,71,.92); font-weight:900; font-size:13px; }
+
+    .card strong{
+      display:block;
+      font-size:16px;
+      margin-bottom:6px;
+    }
+
+    .card span{
+      display:block;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .card a{
+      display:inline-block;
+      margin-top:10px;
+      color:rgba(255,181,71,.95);
+      font-weight:900;
+      font-size:13px;
+    }
 
     footer{
-      margin-top:34px;
+      margin-top:40px;
       border-top:1px solid var(--line);
-      background: rgba(0,0,0,.35);
-      padding:26px 0;
-      color: var(--muted);
+      padding:24px 0;
+      background:rgba(0,0,0,.35);
+      color:var(--muted);
       font-size:12px;
     }
 
-    @media (max-width: 920px){
-      .grid{ grid-template-columns: 1fr; }
+    @media(max-width:920px){
+      .grid{ grid-template-columns:1fr; }
       h1{ font-size:38px; }
+      .logo img{ max-width:140px; }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="container nav">
-      <a class="brand" href="./index.html">
-        <div class="logo">A1</div>
-        <div class="name">
-          <strong>All In 1</strong>
-          <span>Property Management</span>
-        </div>
-      </a>
-      <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="btn" href="tel:+17059271666">Call 705-927-1666</a>
-        <a class="btn primary" href="#services">View Services</a>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="./index.html">
+      <div class="logo">
+        <img src="assets/logo.jpg" alt="All In 1 Property Management Logo">
+      </div>
+      <div class="brand-text">
+        <strong>All In 1</strong>
+        <span>Property Management</span>
+      </div>
+    </a>
+
+    <div style="display:flex; gap:10px;">
+      <a class="btn" href="tel:+17059271666">Call 705-927-1666</a>
+      <a class="btn primary" href="#services">View Services</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>Complete Property Services. Executed With Precision.</h1>
+    <p class="sub">Tree Removal • Excavating • Snow Removal • Lot Clearing • Retaining Walls • Construction & Demolition</p>
+    <div class="actions">
+      <a class="btn primary" href="tel:+17059271666">Call Now</a>
+      <a class="btn" href="#services">Explore Services</a>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="title">
+      <h2>Services</h2>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <strong>Tree Removal</strong>
+        <span>Safe removals, clearing, cleanup.</span>
+        <a href="services/tree-removal.html">View details →</a>
+      </div>
+
+      <div class="card">
+        <strong>Excavating</strong>
+        <span>Site prep, trenching, grading.</span>
+        <a href="services/excavating.html">View details →</a>
+      </div>
+
+      <div class="card">
+        <strong>Snow Removal</strong>
+        <span>Residential + commercial reliability.</span>
+        <a href="services/snow-removal.html">View details →</a>
+      </div>
+
+      <div class="card">
+        <strong>Lot Clearing</strong>
+        <span>Build sites, access routes, cleanup.</span>
+        <a href="services/lot-clearing.html">View details →</a>
+      </div>
+
+      <div class="card">
+        <strong>Retaining Walls</strong>
+        <span>Durable builds with drainage in mind.</span>
+        <a href="services/retaining-walls.html">View details →</a>
+      </div>
+
+      <div class="card">
+        <strong>Construction & Demolition</strong>
+        <span>Safe, efficient execution.</span>
+        <a href="services/construction-demolition.html">View details →</a>
       </div>
     </div>
-  </header>
+  </section>
+</main>
 
-  <main class="container">
-    <section class="hero">
-      <div class="kicker"><span class="bar"></span>Premium local contractor</div>
-      <h1>Complete Property Services. Executed With Precision.</h1>
-      <p class="sub">Tree Removal • Excavating • Snow Removal • Lot Clearing • Retaining Walls • Construction & Demolition</p>
-      <div class="actions">
-        <a class="btn primary" href="tel:+17059271666">Call Now</a>
-        <a class="btn" href="#services">Explore Services</a>
-      </div>
-    </section>
+<footer>
+  <div class="container">
+    © <span id="year"></span> All In 1 Property Management
+  </div>
+</footer>
 
-    <section class="section" id="services">
-      <div class="title">
-        <div>
-          <h2>Services</h2>
-          <p>Click into each service for details. These links match your /services/ pages.</p>
-        </div>
-      </div>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 
-      <div class="grid">
-        <div class="card">
-          <strong>Tree Removal</strong>
-          <span>Safe removals, clearing, cleanup.</span>
-          <a href="services/tree-removal.html">View details →</a>
-        </div>
-
-        <div class="card">
-          <strong>Excavating</strong>
-          <span>Site prep, trenching, grading.</span>
-          <a href="services/excavating.html">View details →</a>
-        </div>
-
-        <div class="card">
-          <strong>Snow Removal</strong>
-          <span>Residential + commercial reliability.</span>
-          <a href="services/snow-removal.html">View details →</a>
-        </div>
-
-        <div class="card">
-          <strong>Lot Clearing</strong>
-          <span>Build sites, access routes, cleanup.</span>
-          <a href="services/lot-clearing.html">View details →</a>
-        </div>
-
-        <div class="card">
-          <strong>Retaining Walls</strong>
-          <span>Durable builds with drainage in mind.</span>
-          <a href="services/retaining-walls.html">View details →</a>
-        </div>
-
-        <div class="card">
-          <strong>Construction & Demolition</strong>
-          <span>Safe, efficient execution.</span>
-          <a href="services/construction-demolition.html">View details →</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container">© <span id="year"></span> All In 1 Property Management</div>
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
