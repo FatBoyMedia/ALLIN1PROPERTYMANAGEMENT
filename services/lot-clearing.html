@@ -7,15 +7,61 @@
   <meta name="description" content="Lot clearing for builds, access routes, and property improvements. Residential, commercial, and rural projects. Free estimates." />
   <link rel="canonical" href="https://fatboymedia.github.io/ALLIN1PROPERTYMANAGEMENT/services/lot-clearing.html" />
   <meta name="theme-color" content="#0b0f14" />
+
+  <!-- Favicon (service pages) -->
+  <link rel="icon" type="image/jpeg" href="../assets/logo.jpg">
+  <link rel="shortcut icon" type="image/jpeg" href="../assets/logo.jpg">
+
   <link rel="stylesheet" href="../assets/site.css" />
+
+  <!-- Logo display fix -->
+  <style>
+    .logo{
+      height:52px;
+      display:flex;
+      align-items:center;
+      border-radius:12px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.10);
+      background:linear-gradient(140deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+      padding:6px;
+    }
+    .logo img{
+      height:100%;
+      width:auto;
+      max-width:170px;
+      display:block;
+    }
+  </style>
+
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Service","serviceType":"Lot Clearing","provider":{"@type":"LocalBusiness","name":"All In 1 Property Management","telephone":"+1-705-927-1666","url":"https://fatboymedia.github.io/ALLIN1PROPERTYMANAGEMENT/"}}
+  {
+    "@context":"https://schema.org",
+    "@type":"Service",
+    "serviceType":"Lot Clearing",
+    "provider":{
+      "@type":"LocalBusiness",
+      "name":"All In 1 Property Management",
+      "telephone":"+1-705-927-1666",
+      "url":"https://fatboymedia.github.io/ALLIN1PROPERTYMANAGEMENT/"
+    }
+  }
   </script>
 </head>
+
 <body>
   <header>
     <div class="container nav">
-      <a class="brand" href="../index.html"><div class="logo">A1</div><div class="name"><strong>All In 1</strong><span>Property Management</span></div></a>
+      <a class="brand" href="../index.html">
+        <div class="logo">
+          <img src="../assets/logo.jpg" alt="All In 1 Property Management Logo">
+        </div>
+        <div class="name">
+          <strong>All In 1</strong>
+          <span>Property Management</span>
+        </div>
+      </a>
+
       <div class="cta">
         <a class="btn" href="../index.html#services">Back to Services</a>
         <a class="btn" href="tel:+17059271666">Call 705-927-1666</a>
@@ -29,7 +75,9 @@
       <div class="hero-inner">
         <div class="kicker"><span class="bar"></span>Service</div>
         <h1>Lot Clearing</h1>
-        <p class="lead">Efficient clearing for new builds, access routes, and property improvements — with cleanup handled as quoted.</p>
+        <p class="lead">
+          Efficient clearing for new builds, access routes, and property improvements — with cleanup handled as quoted.
+        </p>
       </div>
     </section>
 
@@ -40,9 +88,10 @@
           <li>Clearing for new builds and additions</li>
           <li>Brush clearing and overgrowth removal</li>
           <li>Access routes and staging areas</li>
-          <li>Selective clearing (keep what you want)</li>
+          <li>Selectively clearing (keep what you want)</li>
           <li>Cleanup and removal (as quoted)</li>
         </ul>
+
         <div class="cta">
           <a class="btn primary" href="../index.html#quote">Request a Free Estimate</a>
           <a class="btn" href="tel:+17059271666">Call Now</a>
@@ -57,6 +106,7 @@
           <li>Rural properties and acreages</li>
           <li>Property managers maintaining sites</li>
         </ul>
+
         <div class="cta">
           <a class="btn" href="../index.html#projects">View Work</a>
           <a class="btn" href="../index.html#areas">Service Area</a>
@@ -65,7 +115,10 @@
     </div>
   </main>
 
-  <footer><div class="container">© <span id="year"></span> All In 1 Property Management</div></footer>
+  <footer>
+    <div class="container">© <span id="year"></span> All In 1 Property Management</div>
+  </footer>
+
   <script src="../assets/site.js"></script>
 </body>
 </html>
