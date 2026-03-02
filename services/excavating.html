@@ -14,8 +14,8 @@
 
   <link rel="stylesheet" href="../assets/site.css" />
 
-  <!-- Logo display fix -->
   <style>
+    /* Logo display fix */
     .logo{
       height:52px;
       display:flex;
@@ -31,6 +31,28 @@
       width:auto;
       max-width:170px;
       display:block;
+    }
+
+    /* Hero image for this service */
+    .hero.hero-image{
+      position:relative;
+      overflow:hidden;
+      border-radius:18px;
+      background: url('../assets/services/excavating.jpg') center/cover no-repeat;
+      min-height: 340px;
+      display:flex;
+      align-items:flex-end;
+    }
+    .hero.hero-image::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, rgba(11,15,20,.25), rgba(11,15,20,.92));
+    }
+    .hero-inner{
+      position:relative;
+      z-index:1;
+      padding:22px;
     }
   </style>
 
@@ -71,7 +93,8 @@
   </header>
 
   <main class="container">
-    <section class="hero">
+    <!-- UPDATED: hero now has a background image -->
+    <section class="hero hero-image">
       <div class="hero-inner">
         <div class="kicker"><span class="bar"></span>Service</div>
         <h1>Excavating</h1>
