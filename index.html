@@ -23,6 +23,8 @@
       --text:#e8eef6;
       --muted:#aab6c5;
       --accent:#f59e0b;
+      --accent2:#ffb547;
+      --ok:#22c55e;
       --max:1120px;
       --radius:18px;
       --shadow:0 14px 40px rgba(0,0,0,.45);
@@ -78,6 +80,7 @@
       height:100%;
       width:auto;
       max-width:180px;
+      display:block;
     }
 
     .brand-text strong{
@@ -106,6 +109,7 @@
       font-size:13px;
       cursor:pointer;
       transition:.2s;
+      white-space:nowrap;
     }
 
     .btn:hover{
@@ -156,52 +160,74 @@
       margin:0 0 10px;
     }
 
-    .grid{
+    /* ===== Premium service cards with images ===== */
+    .services-grid{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap:14px;
+      margin-top:14px;
     }
 
-    ..card{
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-  overflow:hidden;
-  box-shadow:0 10px 26px rgba(0,0,0,.35);
-  display:flex;
-  flex-direction:column;
-}
+    @media (max-width: 980px){
+      .services-grid{ grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px){
+      .services-grid{ grid-template-columns: 1fr; }
+    }
 
-.card img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-  display:block;
-}
+    .service-card{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      overflow:hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow: 0 10px 26px rgba(0,0,0,.35);
+      position:relative;
+      min-height: 260px;
+      transform: translateY(0);
+      transition: transform .15s ease;
+    }
 
-.card-content{
-  padding:18px;
-}
+    .service-card .media{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(11,15,20,.05), rgba(11,15,20,.88)),
+        var(--img) center/cover no-repeat;
+    }
 
-.card-content strong{
-  display:block;
-  font-size:16px;
-  margin-bottom:6px;
-}
+    .service-card .content{
+      position:relative;
+      padding:18px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      height:100%;
+      justify-content:flex-end;
+    }
 
-.card-content span{
-  display:block;
-  color:var(--muted);
-  font-size:13px;
-}
+    .service-card strong{
+      font-size:18px;
+      letter-spacing:.2px;
+    }
 
-.card-content a{
-  display:inline-block;
-  margin-top:10px;
-  color:rgba(255,181,71,.95);
-  font-weight:900;
-  font-size:13px;
-}
+    .service-card span{
+      color: rgba(232,238,246,.82);
+      font-size:13px;
+      max-width: 48ch;
+    }
+
+    .service-card a{
+      margin-top:6px;
+      color: rgba(255,181,71,.95);
+      font-weight:900;
+      font-size:13px;
+      width:max-content;
+    }
+
+    .service-card:hover{
+      transform: translateY(-2px);
+    }
+
     footer{
       margin-top:40px;
       border-top:1px solid var(--line);
@@ -212,75 +238,9 @@
     }
 
     @media(max-width:920px){
-      .grid{ grid-template-columns:1fr; }
       h1{ font-size:38px; }
       .logo img{ max-width:140px; }
     }
-    /* ===== Services image cards (premium) ===== */
-.services-grid{
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap:14px;
-}
-
-@media (max-width: 980px){
-  .services-grid{ grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 640px){
-  .services-grid{ grid-template-columns: 1fr; }
-}
-
-.service-card{
-  border:1px solid var(--line);
-  border-radius: var(--radius);
-  overflow:hidden;
-  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-  box-shadow: 0 10px 26px rgba(0,0,0,.35);
-  position:relative;
-  min-height: 240px;
-}
-
-.service-card .media{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(180deg, rgba(11,15,20,.05), rgba(11,15,20,.85)),
-    var(--img) center/cover no-repeat;
-}
-
-.service-card .content{
-  position:relative;
-  padding:18px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  height:100%;
-  justify-content:flex-end;
-}
-
-.service-card strong{
-  font-size:18px;
-  letter-spacing:.2px;
-}
-
-.service-card span{
-  color: rgba(232,238,246,.82);
-  font-size:13px;
-  max-width: 48ch;
-}
-
-.service-card a{
-  margin-top:6px;
-  color: rgba(255,181,71,.95);
-  font-weight:900;
-  font-size:13px;
-  width:max-content;
-}
-
-.service-card:hover{
-  transform: translateY(-2px);
-  transition: transform .15s ease;
-}
   </style>
 </head>
 
@@ -320,41 +280,62 @@
       <h2>Services</h2>
     </div>
 
-    <div class="grid">
-      <div class="card">
-        <strong>Tree Removal</strong>
-        <span>Safe removals, clearing, cleanup.</span>
-        <a href="services/tree-removal.html">View details →</a>
+    <!-- IMPORTANT: upload these images to /assets/services/ -->
+    <!-- tree.jpg, excavating.jpg, snow.jpg, lot.jpg, retaining.jpg, demo.jpg -->
+
+    <div class="services-grid">
+      <div class="service-card" style="--img:url('assets/services/tree.jpg');">
+        <div class="media"></div>
+        <div class="content">
+          <strong>Tree Removal</strong>
+          <span>Safe removals, clearing, cleanup.</span>
+          <a href="services/tree-removal.html">View details →</a>
+        </div>
       </div>
 
-      <div class="card">
-        <strong>Excavating</strong>
-        <span>Site prep, trenching, grading.</span>
-        <a href="services/excavating.html">View details →</a>
+      <div class="service-card" style="--img:url('assets/services/excavating.jpg');">
+        <div class="media"></div>
+        <div class="content">
+          <strong>Excavating</strong>
+          <span>Site prep, trenching, grading.</span>
+          <a href="services/excavating.html">View details →</a>
+        </div>
       </div>
 
-      <div class="card">
-        <strong>Snow Removal</strong>
-        <span>Residential + commercial reliability.</span>
-        <a href="services/snow-removal.html">View details →</a>
+      <div class="service-card" style="--img:url('assets/services/snow.jpg');">
+        <div class="media"></div>
+        <div class="content">
+          <strong>Snow Removal</strong>
+          <span>Residential + commercial reliability.</span>
+          <a href="services/snow-removal.html">View details →</a>
+        </div>
       </div>
 
-      <div class="card">
-        <strong>Lot Clearing</strong>
-        <span>Build sites, access routes, cleanup.</span>
-        <a href="services/lot-clearing.html">View details →</a>
+      <div class="service-card" style="--img:url('assets/services/lot.jpg');">
+        <div class="media"></div>
+        <div class="content">
+          <strong>Lot Clearing</strong>
+          <span>Build sites, access routes, cleanup.</span>
+          <a href="services/lot-clearing.html">View details →</a>
+        </div>
       </div>
 
-      <div class="card">
-        <strong>Retaining Walls</strong>
-        <span>Durable builds with drainage in mind.</span>
-        <a href="services/retaining-walls.html">View details →</a>
+      <div class="service-card" style="--img:url('assets/services/retaining.jpg');">
+        <div class="media"></div>
+        <div class="content">
+          <strong>Retaining Walls</strong>
+          <span>Durable builds with drainage in mind.</span>
+          <a href="services/retaining-walls.html">View details →</a>
+        </div>
       </div>
 
-      <div class="card">
-        <strong>Construction & Demolition</strong>
-        <span>Safe, efficient execution.</span>
-        <a href="services/construction-demolition.html">View details →</a>
+      <div class="service-card" style="--img:url('assets/services/demo.jpg');">
+        <div class="media"></div>
+        <div class="content">
+          <strong>Construction & Demolition</strong>
+          <span>Safe, efficient execution.</span>
+          <a href="services/construction-demolition.html">View details →</a>
+        </div>
       </div>
     </div>
   </section>
