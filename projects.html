@@ -1,340 +1,283 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Work Gallery | All In 1 Property Management</title>
-  <meta name="description" content="Work gallery — recent projects by All In 1 Property Management." />
-  <meta name="theme-color" content="#0b0f14" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
-  <link rel="shortcut icon" type="image/jpeg" href="assets/logo.jpg">
+<title>Work Gallery | All In 1 Property Management</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+<link rel="shortcut icon" type="image/jpeg" href="assets/logo.jpg">
 
-  <style>
-    :root{
-      --bg:#0b0f14;
-      --line:rgba(255,255,255,.10);
-      --text:#e8eef6;
-      --muted:#aab6c5;
-      --accent:#f59e0b;
-      --max:1120px;
-      --radius:18px;
-      --shadow:0 14px 40px rgba(0,0,0,.45);
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(900px 500px at 25% -10%, rgba(245,158,11,.14), transparent 60%),
-        radial-gradient(800px 450px at 85% 0%, rgba(255,181,71,.10), transparent 55%),
-        var(--bg);
-      line-height:1.55;
-    }
-    a{color:inherit;text-decoration:none}
-    .container{width:min(100%, calc(var(--max) + 40px)); margin:0 auto; padding:0 20px}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    header{
-      position:sticky; top:0; z-index:1000;
-      background:rgba(11,15,20,.85);
-      backdrop-filter:blur(12px);
-      border-bottom:1px solid var(--line);
-    }
-    .nav{
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 0; gap:14px; flex-wrap:wrap;
-    }
-    .brand{display:flex; align-items:center; gap:14px}
-    .logo{height:60px; display:flex; align-items:center}
-    .logo img{height:100%; width:auto; max-width:180px; display:block}
-    .brand-text strong{display:block; font-family:Oswald, sans-serif; font-size:20px; letter-spacing:.5px}
-    .brand-text span{display:block; font-size:12px; color:var(--muted)}
+<style>
 
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      border-radius:12px; padding:10px 16px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      font-weight:800; font-size:13px;
-      cursor:pointer; transition:.2s; white-space:nowrap;
-    }
-    .btn:hover{background:rgba(255,255,255,.1)}
-    .btn.primary{
-      background:linear-gradient(180deg, rgba(245,158,11,.95), rgba(245,158,11,.85));
-      border-color:rgba(245,158,11,.6);
-      color:#151515;
-    }
+:root{
+--bg:#0b0f14;
+--line:rgba(255,255,255,.10);
+--text:#e8eef6;
+--max:1120px;
+--radius:18px;
+}
 
-    main{padding:40px 0}
-    .hero{
-      border:1px solid var(--line);
-      border-radius:calc(var(--radius) + 6px);
-      box-shadow:var(--shadow);
-      padding:28px;
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-    }
-    h1{font-family:Oswald, sans-serif; font-size:44px; margin:0 0 10px; letter-spacing:.4px}
-    .sub{color:var(--muted); margin:0; max-width:80ch}
-    .status{margin-top:12px;color:var(--muted);font-size:13px}
+*{box-sizing:border-box}
 
-    .grid{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:repeat(4, 1fr);
-      gap:12px;
-    }
-    @media (max-width: 980px){ .grid{grid-template-columns:repeat(2, 1fr)} }
-    @media (max-width: 520px){ .grid{grid-template-columns:1fr} h1{font-size:36px} }
+body{
+margin:0;
+font-family:Inter,system-ui;
+background:var(--bg);
+color:var(--text);
+}
 
-    .tile{
-      border-radius:16px;
-      border:1px solid var(--line);
-      overflow:hidden;
-      aspect-ratio:4/3;
-      background:linear-gradient(180deg, rgba(11,15,20,.10), rgba(11,15,20,.72));
-      cursor:pointer;
-      position:relative;
-    }
-    .tile img, .tile video{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      filter:saturate(1.05) contrast(1.05);
-      transform:scale(1.01);
-    }
-    .tile:hover img, .tile:hover video{transform:scale(1.06); transition:transform .2s ease}
+.container{
+width:min(100%, calc(var(--max) + 40px));
+margin:auto;
+padding:0 20px;
+}
 
-    .badge{
-      position:absolute; left:10px; bottom:10px;
-      background:rgba(0,0,0,.45);
-      border:1px solid rgba(255,255,255,.14);
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:900;
-    }
+/* HEADER */
 
-    footer{
-      margin-top:40px;
-      border-top:1px solid var(--line);
-      padding:24px 0;
-      background:rgba(0,0,0,.35);
-      color:var(--muted);
-      font-size:12px;
-    }
+header{
+position:sticky;
+top:0;
+background:rgba(11,15,20,.9);
+backdrop-filter:blur(10px);
+border-bottom:1px solid var(--line);
+z-index:1000;
+}
 
-    /* Lightbox */
-    .lightbox{
-      position:fixed; inset:0;
-      background:rgba(0,0,0,.88);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-      z-index:2000;
-    }
-    .lightbox.open{display:flex}
-    .lb-inner{
-      width:min(1100px, 96vw);
-      max-height:86vh;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.14);
-      box-shadow:0 18px 60px rgba(0,0,0,.6);
-      overflow:hidden;
-      background:#0b0f14;
-      position:relative;
-    }
-    .lb-inner img, .lb-inner video{
-      width:100%;
-      height:100%;
-      max-height:86vh;
-      object-fit:contain;
-      display:block;
-      background:#0b0f14;
-    }
-    .lb-close{
-      position:absolute; top:12px; right:12px;
-      width:44px; height:44px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.08);
-      color:#fff;
-      font-weight:900;
-      cursor:pointer;
-      z-index:5;
-    }
-  </style>
+.nav{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:14px 0;
+flex-wrap:wrap;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:14px;
+}
+
+.logo{
+height:60px;
+}
+
+.logo img{
+height:100%;
+}
+
+.brand-text strong{
+font-family:Oswald;
+font-size:20px;
+}
+
+.brand-text span{
+font-size:12px;
+opacity:.7;
+display:block;
+}
+
+.btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:10px 16px;
+border-radius:12px;
+border:1px solid var(--line);
+background:rgba(255,255,255,.05);
+font-weight:800;
+font-size:13px;
+}
+
+.btn.primary{
+background:#f59e0b;
+color:#151515;
+border:none;
+}
+
+/* GALLERY */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:14px;
+padding:40px 0;
+}
+
+@media(max-width:900px){
+.gallery{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(max-width:500px){
+.gallery{grid-template-columns:1fr}
+}
+
+.tile{
+border-radius:16px;
+overflow:hidden;
+border:1px solid var(--line);
+cursor:pointer;
+}
+
+.tile img,
+.tile video{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+/* LIGHTBOX */
+
+.lightbox{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.9);
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:2000;
+}
+
+.lightbox.open{
+display:flex;
+}
+
+.lightbox img,
+.lightbox video{
+max-width:100%;
+max-height:90vh;
+}
+
+</style>
 </head>
 
 <body>
-<header>
-  <div class="container nav">
-    <a class="brand" href="./index.html">
-      <div class="logo"><img src="assets/logo.jpg" alt="All In 1 Property Management Logo"></div>
-      <div class="brand-text">
-        <strong>All In 1</strong>
-        <span>Property Management</span>
-      </div>
-    </a>
 
-    <div style="display:flex; gap:10px; flex-wrap:wrap;">
-      <a class="btn" href="./index.html">Home</a>
-      <a class="btn" href="./index.html#services">Services</a>
-      <a class="btn primary" href="tel:+17059271666">Call 705-927-1666</a>
-    </div>
-  </div>
+<header>
+<div class="container nav">
+
+<a class="brand" href="./index.html">
+<div class="logo">
+<img src="assets/logo.jpg">
+</div>
+<div class="brand-text">
+<strong>All In 1</strong>
+<span>Property Management</span>
+</div>
+</a>
+
+<div style="display:flex;gap:10px;">
+<a class="btn" href="index.html">Home</a>
+<a class="btn primary" href="tel:+17059271666">Call 705-927-1666</a>
+</div>
+
+</div>
 </header>
 
 <main class="container">
-  <section class="grid" id="grid" aria-live="polite"></section>
+
+<div id="gallery" class="gallery"></div>
+
 </main>
 
-<footer>
-  <div class="container">© <span id="year"></span> All In 1 Property Management</div>
-</footer>
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" aria-hidden="true">
-  <div class="lb-inner" role="dialog" aria-modal="true" aria-label="Preview">
-    <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
-    <div id="lbMedia"></div>
-  </div>
-</div>
+<div id="lightbox" class="lightbox"></div>
+
 
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
 
-  const GRID = document.getElementById('grid');
-  const STATUS = document.getElementById('status');
+const gallery = document.getElementById("gallery")
+const lightbox = document.getElementById("lightbox")
 
-  const LB = document.getElementById('lightbox');
-  const LB_MEDIA = document.getElementById('lbMedia');
-  const LB_CLOSE = document.getElementById('lbClose');
+function openLightbox(src,type){
 
-  const IMG_EXT = /\.(jpg|jpeg|png|webp|gif)$/i;
-  const VID_EXT = /\.(mp4|webm|ogg|mov|m4v)$/i;
+lightbox.innerHTML=""
 
-  const isVideo = (name) => VID_EXT.test(name);
-  const isImage = (name) => IMG_EXT.test(name);
-  const isMedia = (name) => isImage(name) || isVideo(name);
+if(type==="video"){
 
-  function openLightbox(fileUrl, isVid){
-    LB_MEDIA.innerHTML = '';
-    if(isVid){
-      const v = document.createElement('video');
-      v.controls = true;
-      v.autoplay = true;
-      v.playsInline = true;
-      v.src = fileUrl;
-      LB_MEDIA.appendChild(v);
-    }else{
-      const img = document.createElement('img');
-      img.src = fileUrl;
-      img.alt = 'Work image';
-      LB_MEDIA.appendChild(img);
-    }
-    LB.classList.add('open');
-    LB.setAttribute('aria-hidden','false');
-  }
-  function closeLightbox(){
-    LB.classList.remove('open');
-    LB.setAttribute('aria-hidden','true');
-    LB_MEDIA.innerHTML = '';
-  }
-  LB_CLOSE.addEventListener('click', closeLightbox);
-  LB.addEventListener('click', (e) => { if(e.target === LB) closeLightbox(); });
-  window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
+let v=document.createElement("video")
+v.src=src
+v.controls=true
+v.autoplay=true
 
-  function makeTile(file){
-    const tile = document.createElement('div');
-    tile.className = 'tile';
-    tile.title = file.name;
+lightbox.appendChild(v)
 
-    const badge = document.createElement('div');
-    badge.className = 'badge';
-    badge.textContent = isVideo(file.name) ? 'Video' : 'Photo';
+}else{
 
-    if(isVideo(file.name)){
-      const v = document.createElement('video');
-      v.muted = true;
-      v.playsInline = true;
-      v.preload = 'metadata';
-      v.src = file.download_url;
-      tile.appendChild(v);
-      tile.appendChild(badge);
-      tile.addEventListener('click', () => openLightbox(file.download_url, true));
-    }else{
-      const img = document.createElement('img');
-      img.loading = 'lazy';
-      img.src = file.download_url;
-      img.alt = 'Work photo';
-      tile.appendChild(img);
-      tile.appendChild(badge);
-      tile.addEventListener('click', () => openLightbox(file.download_url, false));
-    }
+let img=document.createElement("img")
+img.src=src
+lightbox.appendChild(img)
 
-    return tile;
-  }
+}
 
-  function detectOwnerRepo(){
-    // GitHub Pages:
-    // https://fatboymedia.github.io/ALLIN1PROPERTYMANAGEMENT/projects.html
-    const host = window.location.hostname; // fatboymedia.github.io
-    const owner = host.split('.')[0];      // fatboymedia
-    const pathParts = window.location.pathname.split('/').filter(Boolean);
-    const repo = pathParts[0];             // ALLIN1PROPERTYMANAGEMENT
-    return { owner, repo };
-  }
+lightbox.classList.add("open")
 
-  async function fetchFolder(ref){
-    const { owner, repo } = detectOwnerRepo();
-    const url = `https://api.github.com/repos/${owner}/${repo}/contents/assets/work?ref=${ref}`;
-    const res = await fetch(url, { cache: 'no-store' });
-    if(!res.ok) throw new Error(`GitHub API failed (${res.status})`);
-    return res.json();
-  }
+}
 
-  async function loadGallery(){
-    try{
-      STATUS.textContent = 'Loading folder…';
+lightbox.onclick=()=>lightbox.classList.remove("open")
 
-      // Try main, then master (covers both branch names)
-      let list;
-      try{
-        list = await fetchFolder('main');
-      }catch(e){
-        list = await fetchFolder('master');
-      }
 
-      const files = (Array.isArray(list) ? list : [])
-        .filter(f => f && f.type === 'file' && isMedia(f.name))
-        .sort((a,b) => (b.name || '').localeCompare(a.name || '')); // newest-ish first if names contain dates
+async function loadGallery(){
 
-      GRID.innerHTML = '';
+const repo="ALLIN1PROPERTYMANAGEMENT"
+const owner="fatboymedia"
 
-      if(files.length === 0){
-        STATUS.textContent = 'No media found in assets/work/. Upload photos/videos there and refresh.';
-        return;
-      }
+const url=`https://api.github.com/repos/${owner}/${repo}/contents/assets/work`
 
-      STATUS.textContent = `Loaded ${files.length} item(s) from assets/work/`;
-      files.forEach(f => GRID.appendChild(makeTile(f)));
+let res=await fetch(url)
+let files=await res.json()
 
-    }catch(err){
-      STATUS.textContent =
-        'Could not load assets/work/ automatically. Make sure the repo is public and assets/work/ exists.';
-    }
-  }
+files.forEach(file=>{
 
-  loadGallery();
+let name=file.name.toLowerCase()
+
+if(name.endsWith(".jpg")||name.endsWith(".jpeg")||name.endsWith(".png")||name.endsWith(".webp")){
+
+let img=document.createElement("img")
+img.src=file.download_url
+
+let tile=document.createElement("div")
+tile.className="tile"
+tile.appendChild(img)
+
+tile.onclick=()=>openLightbox(file.download_url,"img")
+
+gallery.appendChild(tile)
+
+}
+
+if(name.endsWith(".mp4")||name.endsWith(".mov")||name.endsWith(".webm")){
+
+let vid=document.createElement("video")
+vid.src=file.download_url
+vid.muted=true
+vid.loop=true
+vid.autoplay=true
+
+let tile=document.createElement("div")
+tile.className="tile"
+tile.appendChild(vid)
+
+tile.onclick=()=>openLightbox(file.download_url,"video")
+
+gallery.appendChild(tile)
+
+}
+
+})
+
+}
+
+loadGallery()
+
 </script>
+
 </body>
 </html>
