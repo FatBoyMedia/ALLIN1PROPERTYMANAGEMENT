@@ -81,9 +81,9 @@
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
     }
     h1{font-family:Oswald, sans-serif; font-size:44px; margin:0 0 10px; letter-spacing:.4px}
-    .sub{color:var(--muted); margin:0; max-width:75ch}
+    .sub{color:var(--muted); margin:0; max-width:80ch}
+    .status{margin-top:12px;color:var(--muted);font-size:13px}
 
-    /* Gallery grid */
     .grid{
       margin-top:18px;
       display:grid;
@@ -120,6 +120,15 @@
       border-radius:999px;
       font-size:12px;
       font-weight:900;
+    }
+
+    footer{
+      margin-top:40px;
+      border-top:1px solid var(--line);
+      padding:24px 0;
+      background:rgba(0,0,0,.35);
+      color:var(--muted);
+      font-size:12px;
     }
 
     /* Lightbox */
@@ -162,28 +171,6 @@
       cursor:pointer;
       z-index:5;
     }
-
-    .status{
-      margin-top:14px;
-      color:var(--muted);
-      font-size:13px;
-    }
-    .status code{
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      padding:2px 8px;
-      border-radius:999px;
-      color:rgba(232,238,246,.90);
-    }
-
-    footer{
-      margin-top:40px;
-      border-top:1px solid var(--line);
-      padding:24px 0;
-      background:rgba(0,0,0,.35);
-      color:var(--muted);
-      font-size:12px;
-    }
   </style>
 </head>
 
@@ -209,8 +196,8 @@
 <main class="container">
   <section class="hero">
     <h1>Work Gallery</h1>
-    <p class="sub">Recent work photos and videos. Add files to <code>assets/work/</code> and list them in <code>assets/work/gallery.json</code>.</p>
-    <div class="status" id="status">Loading gallery…</div>
+    <p class="sub">Auto-loads everything inside <code>assets/work/</code>. Just upload photos/videos—no JSON, no naming rules.</p>
+    <div class="status" id="status">Loading folder…</div>
   </section>
 
   <section class="grid" id="grid" aria-live="polite"></section>
@@ -229,7 +216,6 @@
 </div>
 
 <script>
-  // year
   document.getElementById('year').textContent = new Date().getFullYear();
 
   const GRID = document.getElementById('grid');
@@ -239,96 +225,118 @@
   const LB_MEDIA = document.getElementById('lbMedia');
   const LB_CLOSE = document.getElementById('lbClose');
 
-  const BASE = 'assets/work/';
-  const MANIFEST = BASE + 'gallery.json';
+  const IMG_EXT = /\.(jpg|jpeg|png|webp|gif)$/i;
+  const VID_EXT = /\.(mp4|webm|ogg|mov|m4v)$/i;
 
-  const isVideo = (name) => /\.(mp4|webm|ogg|mov|m4v)$/i.test(name);
-  const safeName = (name) => String(name || '').trim();
+  const isVideo = (name) => VID_EXT.test(name);
+  const isImage = (name) => IMG_EXT.test(name);
+  const isMedia = (name) => isImage(name) || isVideo(name);
 
-  function openLightboxFor(file){
+  function openLightbox(fileUrl, isVid){
     LB_MEDIA.innerHTML = '';
-    if(isVideo(file)){
+    if(isVid){
       const v = document.createElement('video');
       v.controls = true;
       v.autoplay = true;
       v.playsInline = true;
-      v.src = BASE + file;
+      v.src = fileUrl;
       LB_MEDIA.appendChild(v);
     }else{
       const img = document.createElement('img');
-      img.src = BASE + file;
+      img.src = fileUrl;
       img.alt = 'Work image';
       LB_MEDIA.appendChild(img);
     }
     LB.classList.add('open');
     LB.setAttribute('aria-hidden','false');
   }
-
   function closeLightbox(){
     LB.classList.remove('open');
     LB.setAttribute('aria-hidden','true');
     LB_MEDIA.innerHTML = '';
   }
-
   LB_CLOSE.addEventListener('click', closeLightbox);
   LB.addEventListener('click', (e) => { if(e.target === LB) closeLightbox(); });
   window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLightbox(); });
 
-  function tileBadge(file){
-    return isVideo(file) ? 'Video' : 'Photo';
-  }
-
   function makeTile(file){
     const tile = document.createElement('div');
     tile.className = 'tile';
-    tile.title = file;
+    tile.title = file.name;
 
     const badge = document.createElement('div');
     badge.className = 'badge';
-    badge.textContent = tileBadge(file);
+    badge.textContent = isVideo(file.name) ? 'Video' : 'Photo';
 
-    if(isVideo(file)){
+    if(isVideo(file.name)){
       const v = document.createElement('video');
       v.muted = true;
       v.playsInline = true;
       v.preload = 'metadata';
-      v.src = BASE + file;
+      v.src = file.download_url;
       tile.appendChild(v);
+      tile.appendChild(badge);
+      tile.addEventListener('click', () => openLightbox(file.download_url, true));
     }else{
       const img = document.createElement('img');
       img.loading = 'lazy';
-      img.src = BASE + file;
+      img.src = file.download_url;
       img.alt = 'Work photo';
       tile.appendChild(img);
+      tile.appendChild(badge);
+      tile.addEventListener('click', () => openLightbox(file.download_url, false));
     }
 
-    tile.appendChild(badge);
-    tile.addEventListener('click', () => openLightboxFor(file));
     return tile;
+  }
+
+  function detectOwnerRepo(){
+    // GitHub Pages:
+    // https://fatboymedia.github.io/ALLIN1PROPERTYMANAGEMENT/projects.html
+    const host = window.location.hostname; // fatboymedia.github.io
+    const owner = host.split('.')[0];      // fatboymedia
+    const pathParts = window.location.pathname.split('/').filter(Boolean);
+    const repo = pathParts[0];             // ALLIN1PROPERTYMANAGEMENT
+    return { owner, repo };
+  }
+
+  async function fetchFolder(ref){
+    const { owner, repo } = detectOwnerRepo();
+    const url = `https://api.github.com/repos/${owner}/${repo}/contents/assets/work?ref=${ref}`;
+    const res = await fetch(url, { cache: 'no-store' });
+    if(!res.ok) throw new Error(`GitHub API failed (${res.status})`);
+    return res.json();
   }
 
   async function loadGallery(){
     try{
-      const res = await fetch(MANIFEST, { cache: 'no-store' });
-      if(!res.ok) throw new Error('Could not load gallery.json');
+      STATUS.textContent = 'Loading folder…';
 
-      const list = await res.json();
+      // Try main, then master (covers both branch names)
+      let list;
+      try{
+        list = await fetchFolder('main');
+      }catch(e){
+        list = await fetchFolder('master');
+      }
+
       const files = (Array.isArray(list) ? list : [])
-        .map(safeName)
-        .filter(Boolean);
+        .filter(f => f && f.type === 'file' && isMedia(f.name))
+        .sort((a,b) => (b.name || '').localeCompare(a.name || '')); // newest-ish first if names contain dates
 
       GRID.innerHTML = '';
 
       if(files.length === 0){
-        STATUS.textContent = 'No files listed yet. Add filenames to assets/work/gallery.json';
+        STATUS.textContent = 'No media found in assets/work/. Upload photos/videos there and refresh.';
         return;
       }
 
-      STATUS.textContent = `Loaded ${files.length} item(s).`;
+      STATUS.textContent = `Loaded ${files.length} item(s) from assets/work/`;
       files.forEach(f => GRID.appendChild(makeTile(f)));
+
     }catch(err){
       STATUS.textContent =
-        'Gallery failed to load. Make sure assets/work/gallery.json exists and is valid JSON.';
+        'Could not load assets/work/ automatically. Make sure the repo is public and assets/work/ exists.';
     }
   }
 
